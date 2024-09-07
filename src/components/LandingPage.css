@@ -1,35 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
 .landing-page {
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
+  font-family: 'Poppins', sans-serif;
 }
 
 .hero {
   position: relative;
   z-index: 2;
-  background-color: #2193b0;
+  background: linear-gradient(135deg, #2193b0, #6dd5ed);
   color: white;
   padding: 80px 20px;
   overflow: hidden;
+  transition: all 0.5s ease;
+  min-height: 400px; /* Adjust this value based on your initial hero height */
+}
+
+.hero.expanded {
+  min-height: 600px; /* Adjust this value based on your form height */
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 80%);
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .hero-content {
+  position: relative;
   text-align: center;
   max-width: 800px;
   margin: 0 auto;
-  transition: transform 0.5s ease;
+  transition: transform 0.5s ease, opacity 0.5s ease;
 }
 
 .hero-content.slide-left {
   transform: translateX(-100%);
+  opacity: 0;
 }
 
-.animated-text {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 1s forwards;
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  animation: fadeInDown 1s ease-out;
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin-bottom: 40px;
+  animation: fadeInUp 1s ease-out 0.5s both;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
   to {
     opacity: 1;
     transform: translateY(0);
@@ -41,20 +92,51 @@
   display: flex;
   justify-content: center;
   gap: 20px;
+  animation: fadeIn 1s ease-out 1s both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .btn {
-  padding: 10px 20px;
+  padding: 12px 24px;
   font-size: 1rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scaleY(0);
+  transform-origin: bottom center;
+  transition: transform 0.3s ease;
+}
+
+.btn:hover:after {
+  transform: scaleY(1);
 }
 
 .btn-primary {
   background-color: white;
   color: #2193b0;
+}
+
+.btn-primary:hover {
+  background-color: #f0f0f0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
 
 .btn-secondary {
@@ -63,28 +145,43 @@
   border: 2px solid white;
 }
 
-.expanding-background {
+.btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.form-container {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 100%;
   width: 100%;
-  height: 100%;
-  background-color: #2193b0;
-  transform: translateY(-100%);
-  transition: transform 2s ease;
-  z-index: 1;
-  transition-delay: 0.0s;
-}
-
-.expanding-background.expand {
-  transform: translateY(0);
-}
-
-.landing-page.transitioning .features,
-.landing-page.transitioning .parallax-section,
-.landing-page.transitioning .stats {
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.5s ease, opacity 0.5s ease;
   opacity: 0;
-  transition: opacity 0.3s ease;
+}
+
+.form-container.slide-in {
+  transform: translateX(-100%) translateY(-50%);
+  opacity: 1;
+}
+
+.btn-switch {
+  margin-top: 20px;
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-switch:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .features {
@@ -99,45 +196,44 @@
   max-width: 300px;
 }
 
+.icon-container {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+}
+
 .floating-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   font-size: 3em;
   color: #2193b0;
-  margin-bottom: 20px;
+  animation: float 3s ease-in-out infinite;
 }
 
-.parallax-section {
-  background-color: #2193b0;
-  color: white;
-  text-align: center;
-  padding: 100px 20px;
+@keyframes float {
+  0% {
+    transform: translate(-50%, -50%);
+  }
+  50% {
+    transform: translate(-50%, -60%);
+  }
+  100% {
+    transform: translate(-50%, -50%);
+  }
 }
 
-.parallax-content {
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 20px;
-  border-radius: 8px;
-  max-width: 600px;
-  margin: 0 auto;
+@media (max-width: 768px) {
+  .features {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .feature {
+    margin-bottom: 30px;
+  }
 }
 
-.stats {
-  display: flex;
-  justify-content: space-around;
-  padding: 50px 20px;
-  background-color: #e9ecef;
-}
-
-.stat {
-  text-align: center;
-}
-
-.stat-number {
-  font-size: 2.5em;
-  font-weight: bold;
-  color: #2193b0;
-}
-
-.stat-label {
-  display: block;
-  margin-top: 10px;
-}
+/* ... rest of the CSS remains the same ... */
