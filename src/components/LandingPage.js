@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './LandingPage.css';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
@@ -6,22 +6,63 @@ import RegisterForm from './RegisterForm';
 const LandingPage = () => {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [activeForm, setActiveForm] = useState(null);
+  const heroRef = useRef(null);
+  const bubblesRef = useRef(null);
 
   const handleTransition = (formType) => {
     setIsTransitioning(true);
+    setActiveForm(formType);
+    
+    // Create a burst of bubbles
+    for (let i = 0; i < 20; i++) {
+      setTimeout(() => {
+        createBubble({
+          clientX: Math.random() * window.innerWidth,
+          clientY: window.innerHeight
+        });
+      }, i * 50);
+    }
+
     setTimeout(() => {
-      setActiveForm(formType);
-    }, 500); // Wait for hero content to slide out before showing form
+      setIsTransitioning(false);
+    }, 500);
   };
 
   const switchForm = () => {
     setActiveForm(activeForm === 'login' ? 'register' : 'login');
   };
 
+  const createBubble = (e) => {
+    const bubble = document.createElement('div');
+    bubble.className = 'bubble';
+    const size = Math.random() * 100 + 50;
+    bubble.style.width = `${size}px`;
+    bubble.style.height = `${size}px`;
+    bubble.style.left = `${e.clientX - size / 2}px`;
+    bubble.style.top = `${e.clientY - size / 2}px`;
+    bubblesRef.current.appendChild(bubble);
+    setTimeout(() => bubble.remove(), 4000);
+  };
+
+  const handleMouseMove = (e) => {
+    if (Math.random() < 0.1) {
+      createBubble(e);
+    }
+  };
+
+  useEffect(() => {
+    const hero = heroRef.current;
+    hero.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      hero.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
   return (
     <div className="landing-page">
-      <header className="hero">
-        <div className={`hero-content ${isTransitioning ? 'slide-left' : ''}`}>
+      <header ref={heroRef} className="hero">
+        <div ref={bubblesRef} className="bubbles"></div>
+        <div className={`hero-content ${isTransitioning || activeForm ? 'slide-left' : ''}`}>
           <h1 className="hero-title">Welcome to Our Dental Clinic</h1>
           <p className="hero-subtitle">Your smile is our priority</p>
           <div className="hero-buttons">
@@ -63,7 +104,7 @@ const LandingPage = () => {
         <div className="feature">
           <div className="icon-container">
             <svg className="floating-icon" viewBox="0 0 24 24" width="48" height="48">
-              <path fill="#2193b0" d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
+              <path fill="#2193b0" d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8,8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
             </svg>
           </div>
           <h2>Comfortable Experience</h2>
@@ -72,7 +113,7 @@ const LandingPage = () => {
         <div className="feature">
           <div className="icon-container">
             <svg className="floating-icon" viewBox="0 0 24 24" width="48" height="48">
-              <path fill="#2193b0" d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+              <path fill="#2193b0" d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8,8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
             </svg>
           </div>
           <h2>Flexible Hours</h2>

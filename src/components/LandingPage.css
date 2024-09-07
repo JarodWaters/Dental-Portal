@@ -17,6 +17,70 @@
   min-height: 400px; /* Adjust this value based on your initial hero height */
 }
 
+.bubbles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2), inset 0px 10px 30px 5px rgba(255, 255, 255, 1);
+  height: 200px;
+  width: 200px;
+  animation: rise 4s ease-in infinite;
+}
+
+.bubble:before {
+  content: "";
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 35%;
+  height: 35%;
+  border-radius: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4) 60%, rgba(255, 255, 255, 0) 70%);
+  transform: skew(-15deg, -15deg);
+}
+
+.bubble:after {
+  content: "";
+  position: absolute;
+  top: 15%;
+  left: 15%;
+  width: 15%;
+  height: 15%;
+  border-radius: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4) 60%, rgba(255, 255, 255, 0) 70%);
+  transform: skew(-15deg, -15deg);
+}
+
+@keyframes rise {
+  0% {
+    transform: translateY(0) translateX(0) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.25;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(20px) scale(1);
+    opacity: 0;
+  }
+}
+
+/* Ensure other content is above the bubbles */
+.hero-content, .form-container {
+  position: relative;
+  z-index: 2;
+}
+
 .hero.expanded {
   min-height: 400px; /* Adjust this value based on your form height */
 }
@@ -48,6 +112,7 @@
 .hero-content.slide-left {
   transform: translateX(-100%);
   opacity: 0;
+  pointer-events: none;
 }
 
 .hero-title {
