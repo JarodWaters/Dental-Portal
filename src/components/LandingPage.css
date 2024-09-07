@@ -13,12 +13,12 @@
   color: white;
   padding: 80px 20px;
   overflow: hidden;
-  transition: all 0.5s ease;
+  transition: opacity 0.5s ease;
   min-height: 400px; /* Adjust this value based on your initial hero height */
 }
 
 .hero.expanded {
-  min-height: 600px; /* Adjust this value based on your form height */
+  min-height: 400px; /* Adjust this value based on your form height */
 }
 
 .hero::before {
@@ -235,5 +235,70 @@
     margin-bottom: 30px;
   }
 }
+/* ... (previous styles) ... */
 
+.parallax-section {
+  background-image: url('/public/kari-bjorn-photography-Fdku_oMrDvk-unsplash.jpg');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+.parallax-content {
+  background-color: rgba(33, 147, 176, 0.7); /* Semi-transparent background */
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.parallax-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.parallax-content p {
+  font-size: 1.2rem;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #f8f9fa;
+  padding: 50px 20px;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #2193b0;
+  display: block;
+}
+
+.stat-label {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .stats {
+    flex-direction: column;
+  }
+  
+  .stat {
+    margin-bottom: 30px;
+  }
+}
+
+/* ... (rest of your styles) ... */
 /* ... rest of the CSS remains the same ... */

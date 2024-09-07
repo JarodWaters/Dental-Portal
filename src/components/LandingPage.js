@@ -19,8 +19,8 @@ const LandingPage = () => {
   };
 
   return (
-    <div className={`landing-page ${activeForm ? 'form-active' : ''}`}>
-      <header className={`hero ${activeForm ? 'expanded' : ''}`}>
+    <div className="landing-page">
+      <header className="hero">
         <div className={`hero-content ${isTransitioning ? 'slide-left' : ''}`}>
           <h1 className="hero-title">Welcome to Our Dental Clinic</h1>
           <p className="hero-subtitle">Your smile is our priority</p>
@@ -54,7 +54,7 @@ const LandingPage = () => {
         <div className="feature">
           <div className="icon-container">
             <svg className="floating-icon" viewBox="0 0 24 24" width="48" height="48">
-              <path fill="#2193b0" d="M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2z M12,20c-4.41,0-8-3.59-8-8 s3.59-8,8-8s8,3.59,8,8S16.41,20,12,20z M15.15,7.85c-0.3-0.3-0.79-0.3-1.09,0L12,9.91L9.94,7.85c-0.3-0.3-0.79-0.3-1.09,0 s-0.3,0.79,0,1.09L11.91,12l-3.06,3.06c-0.3,0.3-0.3,0.79,0,1.09c0.15,0.15,0.35,0.22,0.54,0.22s0.39-0.07,0.54-0.22L12,14.09 l2.06,2.06c0.15,0.15,0.35,0.22,0.54,0.22s0.39-0.07,0.54-0.22c0.3-0.3,0.3-0.79,0-1.09L12.09,12l3.06-3.06 C15.45,8.64,15.45,8.15,15.15,7.85z"/>
+              <path fill="#2193b0" d="M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2z M12,20c-4.41,0-8-3.59-8-8s3.59-8,8-8s8,3.59,8,8S16.41,20,12,20z M15.15,7.85c-0.3-0.3-0.79-0.3-1.09,0L12,9.91L9.94,7.85c-0.3-0.3-0.79-0.3-1.09,0 s-0.3,0.79,0,1.09L11.91,12l-3.06,3.06c-0.3,0.3-0.3,0.79,0,1.09c0.15,0.15,0.35,0.22,0.54,0.22s0.39-0.07,0.54-0.22L12,14.09 l2.06,2.06c0.15,0.15,0.35,0.22,0.54,0.22s0.39-0.07,0.54-0.22c0.3-0.3,0.3-0.79,0-1.09L12.09,12l3.06-3.06 C15.45,8.64,15.45,8.15,15.15,7.85z"/>
             </svg>
           </div>
           <h2>Expert Care</h2>
@@ -89,15 +89,15 @@ const LandingPage = () => {
 
       <section className="stats">
         <div className="stat">
-          <span className="stat-number" data-target="5000">0</span>
+          <span className="stat-number" data-target="5000">5,000</span>
           <span className="stat-label">Happy Patients</span>
         </div>
         <div className="stat">
-          <span className="stat-number" data-target="20">0</span>
+          <span className="stat-number" data-target="20">20</span>
           <span className="stat-label">Years of Experience</span>
         </div>
         <div className="stat">
-          <span className="stat-number" data-target="50">0</span>
+          <span className="stat-number" data-target="50">50</span>
           <span className="stat-label">Dental Awards</span>
         </div>
       </section>
