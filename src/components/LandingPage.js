@@ -1,19 +1,44 @@
-import React from 'react';
-import TeethChart from './TeethChart';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './LandingPage.css';
 
 const LandingPage = () => {
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [transitionTarget, setTransitionTarget] = useState('');
+  const navigate = useNavigate();
+
+  const handleTransition = (target) => {
+    setIsTransitioning(true);
+    setTransitionTarget(target);
+    setTimeout(() => {
+      navigate(target);
+    }, 1500); // Total transition time: 1.5 seconds
+  };
+
   return (
-    <div className="landing-page">
+    <div className={`landing-page ${isTransitioning ? 'transitioning' : ''}`}>
       <header className="hero">
-        <h1 className="animated-text">Welcome to Our Dental Clinic</h1>
-        <p className="animated-text">Your smile is our priority</p>
-        <div className="hero-buttons">
-          <button className="btn btn-primary">Start Your Smile Journey</button>
-          <button className="btn btn-secondary">Access Your Dental Portal</button>
+        <div className={`hero-content ${isTransitioning ? 'slide-left' : ''}`}>
+          <h1 className="animated-text">Welcome to Our Dental Clinic</h1>
+          <p className="animated-text">Your smile is our priority</p>
+          <div className="hero-buttons">
+            <button 
+              className="btn btn-primary"
+              onClick={() => handleTransition('/register')}
+            >
+              Start Your Smile Journey
+            </button>
+            <button 
+              className="btn btn-secondary"
+              onClick={() => handleTransition('/login')}
+            >
+              Access Your Dental Portal
+            </button>
+          </div>
         </div>
       </header>
-
+      <div className={`expanding-background ${isTransitioning ? 'expand' : ''}`}></div>
+      
       <section className="features">
         <div className="feature">
           <i className="fas fa-tooth floating-icon"></i>
@@ -53,10 +78,6 @@ const LandingPage = () => {
           <span className="stat-label">Dental Awards</span>
         </div>
       </section>
-
-      <TeethChart />
-
-      {/* Rest of your content */}
     </div>
   );
 };
