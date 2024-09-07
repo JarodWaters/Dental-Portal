@@ -1,0 +1,65 @@
+.teeth-chart {
+  width: 80%;
+  max-width: 600px;
+  margin: 20px auto;
+  position: relative;
+}
+
+.upper-teeth, .lower-teeth {
+  display: flex;
+  justify-content: center;
+  height: 100px;
+  position: relative;
+}
+
+.upper-teeth {
+  transform: rotate(180deg);
+  margin-bottom: 20px;
+}
+
+.tooth {
+  width: 30px;
+  height: 40px;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0 2px;
+  cursor: pointer;
+  position: relative;
+}
+
+.tooth svg {
+  width: 100%;
+  height: 100%;
+  fill: white;
+  stroke: #000;
+  stroke-width: 2;
+}
+
+.tooth.selected svg {
+  fill: #ff6b6b;
+}
+
+.tooth span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  color: #000;
+}
+
+.upper-teeth .tooth span {
+  transform: translate(-50%, -50%) rotate(180deg);
+}
+
+/* Curve the teeth */
+.upper-teeth .tooth:nth-child(1), .upper-teeth .tooth:nth-child(16) { transform: translateY(10px) rotate(-25deg); }
+.upper-teeth .tooth:nth-child(2), .upper-teeth .tooth:nth-child(15) { transform: translateY(5px) rotate(-15deg); }
+.upper-teeth .tooth:nth-child(3), .upper-teeth .tooth:nth-child(14) { transform: translateY(2px) rotate(-10deg); }
+.upper-teeth .tooth:nth-child(4), .upper-teeth .tooth:nth-child(13) { transform: translateY(1px) rotate(-5deg); }
+
+.lower-teeth .tooth:nth-child(1), .lower-teeth .tooth:nth-child(16) { transform: translateY(-10px) rotate(25deg); }
+.lower-teeth .tooth:nth-child(2), .lower-teeth .tooth:nth-child(15) { transform: translateY(-5px) rotate(15deg); }
+.lower-teeth .tooth:nth-child(3), .lower-teeth .tooth:nth-child(14) { transform: translateY(-2px) rotate(10deg); }
+.lower-teeth .tooth:nth-child(4), .lower-teeth .tooth:nth-child(13) { transform: translateY(-1px) rotate(5deg); }
